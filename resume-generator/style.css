@@ -1,0 +1,125 @@
+/* 基础样式 */
+:root {
+  --primary: #165DFF;
+  --secondary: #36CFC9;
+  --neutral: #6B7280;
+  --neutral-light: #F3F4F6;
+  --neutral-dark: #1F2937;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* 表单步骤指示器样式 */
+.step-indicator {
+  flex: 1;
+}
+
+.step-indicator .w-10 {
+  transition: all 0.3s ease;
+}
+
+/* 技能标签样式 */
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--primary/10);
+  color: var(--primary);
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.skill-tag .remove-skill {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+/* 简历预览样式 */
+#resumePreview {
+  line-height: 1.6;
+}
+
+#resumePreview h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+#resumePreview h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.25rem;
+}
+
+#resumePreview h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+#resumePreview p {
+  margin-bottom: 0.5rem;
+}
+
+#resumePreview .contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#resumePreview .experience-item,
+#resumePreview .education-item {
+  margin-bottom: 1rem;
+}
+
+#resumePreview .skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#resumePreview .skill-badge {
+  background-color: #e5e7eb;
+  color: #4b5563;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+/* 统一按钮样式 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary {
+  background-color: #f0f2f5; /* 浅灰色背景（与上一步一致） */
+  color: #4B5563; /* 深灰色文字（与上一步一致） */
+}
+
+.btn-secondary:hover {
+  background-color: #E5E7EB; /* 浅灰色悬停态 */
+}
+
+/* 若有特殊按钮（如生成简历），可单独调整颜色 */
+#generateResume {
+  background-color: #22c55e; /* 绿色（保持功能识别，可选） */
+  color: white;
+}

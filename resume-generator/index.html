@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 简历生成器</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- 顶部导航 -->
+  <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-10">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-primary">AI 简历生成器</h1>
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="#home" class="text-gray-700 hover:text-primary transition-colors">首页</a></li>
+          <li><a href="#builder" class="text-gray-700 hover:text-primary transition-colors">创建简历</a></li>
+          <li><a href="#preview" class="text-gray-700 hover:text-primary transition-colors">预览简历</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 pt-24 pb-12">
+    <!-- 首页/欢迎页面 -->
+    <section id="home" class="mb-16">
+      <div class="text-center max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">专业简历，一键生成</h2>
+        <p class="text-gray-600 mb-8">使用人工智能技术，为您创建令人印象深刻的专业简历</p>
+        <button id="startBtn" class="btn btn-primary">
+          开始创建简历 <i class="fa fa-arrow-right ml-2"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 简历生成表单 -->
+    <section id="builder" class="mb-16 hidden">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">填写您的信息</h2>
+      
+      <!-- 表单步骤指示器 -->
+      <div class="flex justify-between mb-8 relative">
+        <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0"></div>
+        <div id="progressBar" class="absolute top-1/2 left-0 h-1 bg-primary -translate-y-1/2 z-10" style="width: 0%"></div>
+        
+        <div class="step-indicator relative z-20 flex flex-col items-center">
+          <div id="step1Icon" class="w-10 h-10 rounded-full flex items-center justify-center bg-primary/10 text-primary border-2 border-primary">1</div>
+          <p class="mt-2 text-sm font-medium">基本信息</p>
+        </div>
+        
+        <div class="step-indicator relative z-20 flex flex-col items-center">
+          <div id="step2Icon" class="w-10 h-10 rounded-full flex items-center justify-center bg-gray-100 text-gray-500">2</div>
+          <p class="mt-2 text-sm font-medium">工作经验</p>
+        </div>
+        
+        <div class="step-indicator relative z-20 flex flex-col items-center">
+          <div id="step3Icon" class="w-10 h-10 rounded-full flex items-center justify-center bg-gray-100 text-gray-500">3</div>
+          <p class="mt-2 text-sm font-medium">教育背景</p>
+        </div>
+        
+        <div class="step-indicator relative z-20 flex flex-col items-center">
+          <div id="step4Icon" class="w-10 h-10 rounded-full flex items-center justify-center bg-gray-100 text-gray-500">4</div>
+          <p class="mt-2 text-sm font-medium">技能</p>
+        </div>
+      </div>
+      
+      <!-- 表单步骤内容 -->
+      <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <!-- 步骤 1: 基本信息 -->
+        <div id="step1" class="form-step">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">基本信息</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-1">姓名</label>
+              <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">邮箱</label>
+              <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+            </div>
+            
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">电话</label>
+              <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+            </div>
+            
+            <div>
+              <label for="position" class="block text-sm font-medium text-gray-700 mb-1">求职意向</label>
+              <input type="text" id="position" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <label for="summary" class="block text-sm font-medium text-gray-700 mb-1">个人简介</label>
+            <textarea id="summary" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"></textarea>
+          </div>
+          
+          <div class="flex justify-end">
+            <button id="nextToStep2" class="btn btn-secondary">
+              下一步 <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 步骤 2: 工作经验 -->
+        <div id="step2" class="form-step hidden">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">工作经验</h3>
+          
+          <div id="experienceContainer">
+            <div class="experience-item mb-6 border-b border-gray-100 pb-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                <div>
+                  <label for="company1" class="block text-sm font-medium text-gray-700 mb-1">公司名称</label>
+                  <input type="text" id="company1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                </div>
+                
+                <div>
+                  <label for="position1" class="block text-sm font-medium text-gray-700 mb-1">职位</label>
+                  <input type="text" id="position1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                </div>
+                
+                <div>
+                  <label for="startDate1" class="block text-sm font-medium text-gray-700 mb-1">开始日期</label>
+                  <input type="month" id="startDate1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                </div>
+                
+                <div>
+                  <label for="endDate1" class="block text-sm font-medium text-gray-700 mb-1">结束日期</label>
+                  <input type="month" id="endDate1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                </div>
+              </div>
+              
+              <div>
+                <label for="description1" class="block text-sm font-medium text-gray-700 mb-1">工作描述</label>
+                <textarea id="description1" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"></textarea>
+              </div>
+            </div>
+          </div>
+          
+          <button id="addExperience" class="text-primary hover:text-primary/80 font-medium py-1 px-4 mb-6 flex items-center">
+            <i class="fa fa-plus-circle mr-2"></i> 添加工作经验
+          </button>
+          
+          <div class="flex justify-between">
+            <button id="backToStep1" class="btn btn-secondary">
+              <i class="fa fa-arrow-left mr-2"></i> 上一步
+            </button>
+            
+            <button id="nextToStep3" class="btn btn-secondary">
+              下一步 <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 步骤 3: 教育背景 -->
+        <div id="step3" class="form-step hidden">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">教育背景</h3>
+          
+          <div id="educationContainer">
+            <div class="education-item mb-6 border-b border-gray-100 pb-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                <div>
+                  <label for="school1" class="block text-sm font-medium text-gray-700 mb-1">学校名称</label>
+                  <input type="text" id="school1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                </div>
+                
+                <div>
+                  <label for="degree1" class="block text-sm font-medium text-gray-700 mb-1">学位</label>
+                  <input type="text" id="degree1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                </div>
+                
+                <div>
+                  <label for="field1" class="block text-sm font-medium text-gray-700 mb-1">专业</label>
+                  <input type="text" id="field1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                </div>
+                
+                <div>
+                  <label for="eduStartDate1" class="block text-sm font-medium text-gray-700 mb-1">开始日期</label>
+                  <input type="month" id="eduStartDate1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                </div>
+                
+                <div>
+                  <label for="eduEndDate1" class="block text-sm font-medium text-gray-700 mb-1">结束日期</label>
+                  <input type="month" id="eduEndDate1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button id="addEducation" class="text-primary hover:text-primary/80 font-medium py-1 px-4 mb-6 flex items-center">
+            <i class="fa fa-plus-circle mr-2"></i> 添加教育经历
+          </button>
+          
+          <div class="flex justify-between">
+            <button id="backToStep2" class="btn btn-secondary">
+              <i class="fa fa-arrow-left mr-2"></i> 上一步
+            </button>
+            
+            <button id="nextToStep4" class="btn btn-secondary">
+              下一步 <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 步骤 4: 技能 -->
+        <div id="step4" class="form-step hidden">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">技能</h3>
+          
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-1">添加技能</label>
+            <div class="flex">
+              <input type="text" id="skillInput" placeholder="例如: JavaScript, React, HTML" class="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+              <button id="addSkill" class="btn btn-secondary">
+                添加
+              </button>
+            </div>
+          </div>
+          
+          <div id="skillsContainer" class="mb-6 flex flex-wrap gap-2">
+            <!-- 技能标签将在这里动态生成 -->
+          </div>
+          
+          <div class="flex justify-between">
+            <button id="backToStep3" class="btn btn-secondary">
+              <i class="fa fa-arrow-left mr-2"></i> 上一步
+            </button>
+            
+            <button id="generateResume" class="btn btn-primary bg-green-600 hover:bg-green-700">
+              生成简历 <i class="fa fa-file-text-o ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 简历预览 -->
+    <section id="preview" class="mb-16 hidden">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">简历预览</h2>
+      
+      <div class="flex justify-end mb-4">
+        <button id="editResume" class="btn btn-secondary">
+          <i class="fa fa-edit mr-2"></i> 编辑简历
+        </button>
+        
+        <button id="downloadPDF" class="btn btn-primary bg-red-600 hover:bg-red-700">
+          <i class="fa fa-download mr-2"></i> 下载 PDF
+        </button>
+      </div>
+      
+      <div id="resumePreview" class="bg-white shadow-xl rounded-lg p-8 min-h-[1123px] w-full max-w-4xl mx-auto">
+        <!-- 简历内容将在这里动态生成 -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p>© 2025 AI 简历生成器 - 帮助您创建专业的求职简历</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
