@@ -6,7 +6,7 @@
   * javasript
 ## step 2
 * todo list
-  * 链接某ai的api
+  * 链接某AI
 
 ![demo_0.png](images/demo_0.png)
 ![demo_1.png](images/demo_1.png)
